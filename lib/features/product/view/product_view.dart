@@ -1,7 +1,6 @@
 import 'package:ass_simple_ecommorce/core/config/pallet.dart';
 import 'package:ass_simple_ecommorce/core/routes/router.dart';
 import 'package:ass_simple_ecommorce/features/product/controller/product_controller.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
