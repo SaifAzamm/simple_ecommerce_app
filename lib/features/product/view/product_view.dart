@@ -17,14 +17,41 @@ class ProductView extends StatelessWidget {
       appBar: AppBar(
         title: const Text("SHOPX"),
         actions: [
-          Obx(() => badges.Badge(
-                onTap: () => Get.toNamed(AppRoutes.cartScreen),
-                badgeContent: Text(
-                  '${controller.cart.length}',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                child: const Icon(Icons.shopping_cart),
-              )),
+          Obx(
+            () => GestureDetector(
+              onTap: () => Get.toNamed(AppRoutes.cartScreen),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 5.w),
+                    child: const Icon(Icons.shopping_cart, size: 28),
+                  ),
+                  Positioned(
+                    top: -4,
+                    right: -6,
+                    child: Container(
+                      padding: EdgeInsets.all(6.w),
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        controller.cart.isEmpty
+                            ? '0'
+                            : '${controller.cart.length}',
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 10.sp,
+                            ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           const SizedBox(width: 10),
         ],
       ),

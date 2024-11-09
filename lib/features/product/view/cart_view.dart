@@ -1,4 +1,3 @@
-import 'package:ass_simple_ecommorce/core/config/pallet.dart';
 import 'package:ass_simple_ecommorce/features/product/controller/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,7 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProductController controller = Get.find();
+    final ProductController controller = Get.find<ProductController>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Shopoo Cart"),

@@ -38,7 +38,8 @@ class ProductController extends GetxController {
       product.quantity = 1;
       cart.add(product);
     }
-    Get.snackbar('Cart Updated', '${product.title} added to cart');
+    Get.snackbar('Cart Updated', '${product.title} added to cart',
+        duration: const Duration(milliseconds: 900));
   }
 
   void increaseQuantity(GetProductResponse product) {
@@ -57,6 +58,7 @@ class ProductController extends GetxController {
 
   void removeFromCart(GetProductResponse product) {
     cart.remove(product);
-    Get.snackbar('Cart Updated', '${product.title} removed from cart');
+    Get.snackbar('Cart Updated', '${product.title} removed from cart',
+        duration: const Duration(milliseconds: 900));
   }
 }

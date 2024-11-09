@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ass_simple_ecommorce/core/resources/app_theme.dart';
 import 'package:ass_simple_ecommorce/core/routes/router.dart';
 import 'package:ass_simple_ecommorce/core/routes/routes.dart';
@@ -9,7 +11,9 @@ import 'package:get_storage/get_storage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  runApp(const MyApp());
+  Timer(const Duration(seconds: 2), () {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
