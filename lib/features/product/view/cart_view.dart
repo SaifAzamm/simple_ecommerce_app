@@ -1,4 +1,4 @@
-// cart_screen.dart
+import 'package:ass_simple_ecommorce/core/config/pallet.dart';
 import 'package:ass_simple_ecommorce/features/product/controller/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,14 +15,17 @@ class CartView extends StatelessWidget {
       ),
       body: Obx(() {
         if (controller.cart.isEmpty) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.remove_shopping_cart, size: 100, color: Colors.grey),
-                SizedBox(height: 10),
-                Text("You have no items in your Cart",
-                    style: TextStyle(fontSize: 18)),
+                const Icon(Icons.remove_shopping_cart,
+                    size: 100, color: Colors.grey),
+                const SizedBox(height: 10),
+                Text(
+                  "You have no items in your Cart",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ],
             ),
           );
@@ -38,8 +41,7 @@ class CartView extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 'Subtotal Amount: \$ ${subtotal.toStringAsFixed(2)}',
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
             Expanded(
@@ -66,23 +68,36 @@ class CartView extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(product.title ?? '',
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold)),
+                                Text(
+                                  product.title ?? '',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
                                 const SizedBox(height: 4),
-                                Text("\$ ${product.price}",
-                                    style: const TextStyle(
-                                        color: Colors.green, fontSize: 16)),
+                                Text(
+                                  "\$ ${product.price}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(color: Colors.green),
+                                ),
                                 const SizedBox(height: 4),
-                                const Text("Eligible for free shipping",
-                                    style: TextStyle(color: Colors.grey)),
+                                const Text(
+                                  "Eligible for free shipping",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
                                 const SizedBox(height: 4),
-                                const Text("In Stock",
-                                    style: TextStyle(color: Colors.green)),
+                                const Text(
+                                  "In Stock",
+                                  style: TextStyle(color: Colors.green),
+                                ),
                                 const SizedBox(height: 4),
-                                Text("Category : ${product.category}",
-                                    style: const TextStyle(color: Colors.grey)),
+                                Text(
+                                  "Category : ${product.category}",
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
                                 const SizedBox(height: 8),
                                 Row(
                                   children: [
@@ -92,8 +107,11 @@ class CartView extends StatelessWidget {
                                       icon: const Icon(
                                           Icons.remove_circle_outline),
                                     ),
-                                    Text('${product.quantity}',
-                                        style: const TextStyle(fontSize: 16)),
+                                    Text(
+                                      '${product.quantity}',
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
+                                    ),
                                     IconButton(
                                       onPressed: () =>
                                           controller.increaseQuantity(product),
@@ -104,8 +122,17 @@ class CartView extends StatelessWidget {
                                     ElevatedButton.icon(
                                       onPressed: () =>
                                           controller.removeFromCart(product),
-                                      icon: const Icon(Icons.delete),
-                                      label: const Text("Delete"),
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                      ),
+                                      label: Text(
+                                        "Delete",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(color: Colors.white),
+                                      ),
                                     ),
                                   ],
                                 ),

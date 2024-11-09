@@ -1,8 +1,9 @@
-// screens/product_screen.dart
+import 'package:ass_simple_ecommorce/core/config/pallet.dart';
 import 'package:ass_simple_ecommorce/core/routes/router.dart';
 import 'package:ass_simple_ecommorce/features/product/controller/product_controller.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../data/response/get_product_response.dart';
 
@@ -18,10 +19,13 @@ class ProductView extends StatelessWidget {
         actions: [
           Obx(() => badges.Badge(
                 onTap: () => Get.toNamed(AppRoutes.cartScreen),
-                badgeContent: Text('${controller.cart.length}'),
+                badgeContent: Text(
+                  '${controller.cart.length}',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
                 child: const Icon(Icons.shopping_cart),
               )),
-          const SizedBox(width: 10)
+          const SizedBox(width: 10),
         ],
       ),
       body: Obx(() {
@@ -57,15 +61,16 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      elevation: 5,
+      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 6.h),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: ClipRRect(
               borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(8)),
+                  const BorderRadius.vertical(top: Radius.circular(12)),
               child: Image.network(
                 product.image ?? '',
                 fit: BoxFit.cover,
@@ -75,39 +80,49 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   product.title ?? 'No Title',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.bold),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 6.h),
                 Text(
                   "\$${product.price?.toStringAsFixed(2) ?? '0.0'}",
-                  style: const TextStyle(color: Colors.green),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Colors.green, fontWeight: FontWeight.w600),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Row(
                   children: [
-                    const Icon(Icons.star, color: Colors.yellow, size: 16),
-                    const SizedBox(width: 4),
+                    Icon(Icons.star, color: Colors.yellow, size: 16.sp),
+                    SizedBox(width: 4.w),
                     Text(
                       product.rating?.rate?.toStringAsFixed(1) ?? '0.0',
-                      style: const TextStyle(fontSize: 12),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.h),
                 ElevatedButton.icon(
                   onPressed: () => controller.addToCart(product),
-                  icon: const Icon(Icons.shopping_cart),
-                  label: const Text("Add to Cart"),
+                  icon: Icon(Icons.shopping_cart, size: 18.sp),
+                  label: Text("Add to Cart", style: TextStyle(fontSize: 14.sp)),
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 36),
+                    backgroundColor: Palette.buttonPrimary,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    minimumSize: Size(double.infinity, 36.h),
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
                   ),
                 ),
               ],

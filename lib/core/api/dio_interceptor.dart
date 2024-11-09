@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'package:ass_simple_ecommorce/core/utils/services/firebase/firebase_crashlogger.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../helper/common.dart';
 
-class DioInterceptor extends Interceptor with FirebaseCrashLogger {
+class DioInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     String headerMessage = "";
